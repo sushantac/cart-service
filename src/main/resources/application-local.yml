@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ecommerce?currentSchema=cart
+
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  kafka:
+    bootstrap-servers: localhost:9092
+
+logging:
+  level:
+    com.ecommerce.cart: DEBUG
+    org.springframework.security: DEBUG
+
+app:
+  kafka:
+    enabled: true
