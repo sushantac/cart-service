@@ -20,11 +20,13 @@ spring:
     show-sql: false
 
   liquibase:
+    enabled: true
     change-log: classpath:db/changelog/db.changelog-master.xml
     default-schema: cart
+    create-schema: true
 
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -50,6 +52,10 @@ server:
   port: 8082
   shutdown: graceful
 
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 20s
+
 management:
   endpoints:
     web:
@@ -58,9 +64,6 @@ management:
   endpoint:
     health:
       show-details: when-authorized
-  tracing:
-    sampling:
-      probability: 1.0
 
 app:
   internal:
@@ -74,6 +77,3 @@ app:
     topics:
       cart-checkout: cart.checkout.initiated
       order-placed: order.placed
-
-  liquibase:
-    create-schema: true
