@@ -1,6 +1,5 @@
 package com.ecommerce.cart.config;
 
-import jakarta.annotation.PostConstruct;
 import javax.sql.DataSource;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +19,6 @@ public class LiquibaseConfig {
         SpringLiquibase liquibase = new SpringLiquibase() {
             @Override
             public void afterPropertiesSet() {
-                // Create schema before Liquibase initializes
                 org.springframework.jdbc.core.JdbcTemplate jdbcTemplate = new org.springframework.jdbc.core.JdbcTemplate(dataSource);
                 jdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + schema);
                 super.afterPropertiesSet();
@@ -30,7 +28,6 @@ public class LiquibaseConfig {
         liquibase.setChangeLog(properties.getChangeLog());
         liquibase.setDefaultSchema(schema);
         liquibase.setContexts(properties.getContexts());
-        liquibase.setLabels(properties.getLabels());
         liquibase.setDropFirst(properties.isDropFirst());
         return liquibase;
     }
