@@ -74,3 +74,6 @@ app:
     topics:
       cart-checkout: cart.checkout.initiated
       order-placed: order.placed
+
+  liquibase:
+    create-schema: true
