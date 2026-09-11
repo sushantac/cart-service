@@ -20,14 +20,14 @@ public class LiquibaseConfig {
             @Override
             public void afterPropertiesSet() {
                 org.springframework.jdbc.core.JdbcTemplate jdbcTemplate = new org.springframework.jdbc.core.JdbcTemplate(dataSource);
-                jdbcTemplate.execute("CREATE SCHEMA IF NOT EXISTS " + schema);
+                jdbcTemplate.execute("CREATE cart IF NOT EXISTS " + schema);
                 super.afterPropertiesSet();
             }
         };
         liquibase.setDataSource(dataSource);
         liquibase.setChangeLog(properties.getChangeLog());
         liquibase.setDefaultSchema(schema);
-        liquibase.setContexts(properties.getContexts());
+        liquibase.setContexts(properties.getContexts() != null ? String.join(",", properties.getContexts()) : "");
         liquibase.setDropFirst(properties.isDropFirst());
         return liquibase;
     }
