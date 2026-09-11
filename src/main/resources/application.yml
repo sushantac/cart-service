@@ -24,15 +24,16 @@ spring:
     change-log: classpath:db/changelog/db.changelog-master.xml
     default-schema: cart
 
-  kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
-    producer:
+  spring:
+    kafka:
+    bootstrap.servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+      producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
+      consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:
+        properties:
         spring.json.trusted.packages: "com.ecommerce.*,com.company.orderapi.*"
         spring.json.use.type.headers: false
         spring.json.value.default.type: com.ecommerce.cart.dto.OrderPlacedEvent
@@ -70,7 +71,8 @@ app:
     url: ${PRODUCT_SERVICE_URL:http://localhost:8083}
   jwt:
     secret: ${JWT_SECRET:dev-secret-change-me-please-at-least-32chars-long-123}
-  kafka:
+  spring:
+    kafka:
     enabled: true
     topics:
       cart-checkout: cart.checkout.initiated
