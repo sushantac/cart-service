@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cart-service
+    name: cart
 
   datasource:
     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${POSTGRES_DB:ecommerce}?currentSchema=cart
@@ -25,7 +25,7 @@ spring:
     default-schema: cart
 
   kafka:
-    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    bootstrap.servers: ${KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
@@ -67,7 +67,7 @@ app:
   internal:
     api-key: ${INTERNAL_API_KEY:internal-service-key-12345}
   product-service:
-    url: ${PRODUCT_SERVICE_URL:http://product-service:8083}
+    url: ${PRODUCT_SERVICE_URL:http://localhost:8083}
   jwt:
     secret: ${JWT_SECRET:dev-secret-change-me-please-at-least-32chars-long-123}
   kafka:
