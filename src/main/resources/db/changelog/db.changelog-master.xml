@@ -5,7 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                             http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
+    <changeSet id="00_create_schema" author="sushant">
+        <sql>CREATE SCHEMA IF NOT EXISTS cart</sql>
+    </changeSet>
+
     <include file="db/changelog/v1.0/01_create_carts_table.xml"/>
     <include file="db/changelog/v1.0/02_create_cart_items_table.xml"/>
     <include file="db/changelog/v1.0/03_create_idempotency_keys_table.xml"/>
+
 </databaseChangeLog>
